@@ -19,20 +19,31 @@ const asObject = (anecdote) => ({
 
 const useAnecdoteStore = create((set) => ({
   anecdotes: anecdotesAtStart.map(asObject),
+  filter: "",
   actions: {
     vote: (id) =>
       set((state) => ({
-        anecdotes: state.anecdotes.map((anecdote) =>
-          anecdote.id === id
-            ? { ...anecdote, votes: anecdote.votes + 1 }
-            : anecdote,
-        ).toSorted((a, b) => b.votes - a.votes),
+        anecdotes: state.anecdotes
+          .map((anecdote) =>
+            anecdote.id === id
+              ? { ...anecdote, votes: anecdote.votes + 1 }
+              : anecdote,
+          )
+          .toSorted((a, b) => b.votes - a.votes),
       })),
-    add: (anecdote) => set((state) => ({
-      anecdotes: state.anecdotes.concat(asObject(anecdote))
-    }))
+    add: (anecdote) =>
+      set((state) => ({
+        anecdotes: state.anecdotes.concat(asObject(anecdote)),
+      })),
+    changeFilter: (f) => set({ filter: f.toUpperCase() }),
   },
 }));
 
-export const useAnecdotes = () => useAnecdoteStore((state) => state.anecdotes);
-export const useAnecdotesActions = () => useAnecdoteStore((state) => state.actions);
+export const useAnecdotes = () => {
+  const filter = useAnecdoteStore((state) => state.filter);
+  return useAnecdoteStore((state) => state.anecdotes).filter((anc) =>
+    anc.content.toUpperCase().includes(filter),
+  );
+};
+export const useAnecdotesActions = () =>
+  useAnecdoteStore((state) => state.actions);
