@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAll, addNew, vote } from "./service";
+import useNotify from "./components/useNotify";
 
 const getId = () => (100000 * Math.random()).toFixed(0);
 
@@ -11,6 +12,7 @@ const asObject = (content) => ({
 
 const useAnecdotes = () => {
   const queryClient = useQueryClient();
+  const { showMsg } = useNotify();
 
   const result = useQuery({
     queryKey: ["anecdotes"],
@@ -24,15 +26,26 @@ const useAnecdotes = () => {
     onSuccess: (newAnecdote) => {
       const anecdotes = queryClient.getQueryData(["anecdotes"]);
       queryClient.setQueryData(["anecdotes"], anecdotes.concat(newAnecdote));
+      showMsg(`created ${newAnecdote.content}`);
     },
+    onError: (error) => {
+      if (error.message) {
+        showMsg(error.message);
+      }
+    }
   });
 
   const voteMutation = useMutation({
     mutationFn: ({ id, obj }) => {
       return vote(id, obj);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["anecdotes"]);
+    onSuccess: (newAnecdote) => {
+      const anecdotes = queryClient.getQueryData(["anecdotes"]);
+      queryClient.setQueryData(
+        ["anecdotes"],
+        anecdotes.map((anc) => (anc.id === newAnecdote.id ? newAnecdote : anc)),
+      );
+      showMsg(`anecdote '${newAnecdote.content}' voted`);
     },
   });
 

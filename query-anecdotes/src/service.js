@@ -3,11 +3,13 @@ const baseURL = "http://localhost:3001/anecdotes";
 export const getAll = async () => {
   const response = await fetch(baseURL);
 
+  const result = await response.json();
+
   if (!response.ok) {
-    throw new Error("Client refused");
+    throw new Error(`${result.error}`);
   }
 
-  return await response.json();
+  return result; 
 }
 
 export const addNew = async (ancObj) => {
@@ -19,7 +21,13 @@ export const addNew = async (ancObj) => {
 
   const response = await fetch(baseURL, options);
 
-  return await response.json();
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(`${result.error}`);
+  }
+
+  return result; 
 }
 
 export const vote = async (id, ancObj) => {
@@ -31,5 +39,11 @@ export const vote = async (id, ancObj) => {
 
   const response = await fetch(`${baseURL}/${id}`, options);
 
-  return await response.json();
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(`${result.error}`);
+  }
+
+  return result; 
 }

@@ -1,6 +1,8 @@
-
+import useNotification from "./useNotify"
 
 const Notification = () => {
+  const { msg } = useNotification();
+
   const style = {
     border: "solid",
     padding: 10,
@@ -8,9 +10,9 @@ const Notification = () => {
     marginBottom: 5,
   }
 
-  if (true) return null
+  if (msg === '') return null
 
-  return <div data-testid="notification" style={style}></div>
+  return <div data-testid="notification" style={style}>{msg}</div>
 }
 
 export default Notification
