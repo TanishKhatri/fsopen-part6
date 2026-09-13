@@ -26,7 +26,6 @@ const sortedByVotes = (anecdotes) => {
 const useAnecdoteStore = create((set, get) => ({
   anecdotes: [],
   filter: "",
-  notification: "",
   actions: {
     initialize: async () => {
       const allAnecdotes = await service.getAll();
@@ -78,3 +77,5 @@ export const useAnecdotesActions = () =>
 
 export const useNotification = () =>
   useNotificationStore((state) => state.notification);
+
+export default useAnecdoteStore;
