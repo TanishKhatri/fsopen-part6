@@ -14,6 +14,10 @@ const AnecdoteList = () => {
     voteOnAnecdote(id);
   }
 
+  const deleteAnecdote = (id) => {
+    actions.deleteAnecdote(id);
+  }
+
   return (
     <div>
       {anecdotes.map((anecdote) => (
@@ -22,6 +26,7 @@ const AnecdoteList = () => {
           <div>
             has {anecdote.votes}
             <button onClick={() => vote(anecdote.id)}>vote</button>
+            {anecdote.votes === 0 && <button onClick={() => deleteAnecdote(anecdote.id)}>delete</button>}
           </div>
         </div>
       ))}

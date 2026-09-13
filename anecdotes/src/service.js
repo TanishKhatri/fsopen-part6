@@ -37,8 +37,18 @@ const update = async (id, anecdote) => {
     throw new Error("Server responded with error");
   }
 
-  const data =  await response.json();
+  const data = await response.json();
   return data;
 }
 
-export default { getAll, addNew, update }
+const deleteAnc = async (id) => {
+  const response = await fetch(`${baseURL}/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error("Server responded with error");
+  }
+}
+
+export default { getAll, addNew, update, deleteAnc }
