@@ -1,9 +1,14 @@
 import { useAnecdotes, useAnecdotesActions } from "../store";
+import { useEffect } from "react";
 
 const AnecdoteList = () => {
   const anecdotes = useAnecdotes()
   const actions = useAnecdotesActions();
   const voteOnAnecdote = actions.vote;
+
+  useEffect(() => {
+    actions.initialize();
+  }, [actions]);
 
   const vote = (id) => {
     voteOnAnecdote(id);
