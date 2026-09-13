@@ -1,27 +1,27 @@
 {
   "anecdotes": [
     {
-      "id": "08950019-41b6-47fa-bc40-c89a4c74a573",
+      "id": "3080b1bd-ccda-4031-82ee-5761180d6bbe",
       "content": "Make it work, then make it fast",
       "votes": 0
     },
     {
-      "id": "9b8488c1-f795-4a7c-aa0b-2c1af0840307",
+      "id": "4ae34a62-e560-4792-94ab-87f8e060034c",
       "content": "There are two hard things in computer science",
       "votes": 3
     },
     {
-      "id": "7d730688-9b64-418c-b3c4-039d4c9269bc",
+      "id": "d19255fe-81fc-4fc6-a4c0-8b3f3e7c7389",
       "content": "Untested code is broken code",
       "votes": 4
     },
     {
-      "id": "16e701e5-61b1-4e2a-9c60-ca1bb6664e75",
+      "id": "0e099376-67b2-41f5-88cb-d192e6bc8ca7",
       "content": "Simplicity is the ultimate sophistication",
       "votes": 5
     },
     {
-      "id": "7a0e3e4e-1989-4a0e-9fac-2fe7b061f326",
+      "id": "f76c5363-405d-46ea-b9ca-4221ed4ed71f",
       "content": "Real artists ship code",
       "votes": 7
     }
